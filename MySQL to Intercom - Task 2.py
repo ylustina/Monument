@@ -27,7 +27,14 @@ class IntercomUser():
                                                host='127.0.0.1',
                                                database='Monument')
 
-        except
+        except mysql.connector.Error as err:
+            if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
+                print("Access denied: Invalid username or password.")
+            elif err.errno == errorcode.ER_BAD_DB_ERROR:
+                print("Database does not exist.")
+            else:
+                print(err)
+
 
 
         # Get all users from MySQL table
