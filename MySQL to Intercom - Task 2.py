@@ -1,4 +1,4 @@
-
+import mysql.connector
 
 from mysql.connector import errorcode
 from intercom.client import Client
@@ -22,12 +22,16 @@ class IntercomUser():
 
         # Connect to the database
         try:
-            self.cnx = mysql.connector.connect()
+            self.cnx = mysql.connector.connect(user='user',
+                                               password='password',
+                                               host='127.0.0.1',
+                                               database='Monument')
 
         except
 
 
         # Get all users from MySQL table
+
 
 
     def create_Intercom_user(self):
@@ -38,9 +42,10 @@ class IntercomUser():
                                        email=email,
                                        name=name)
 
+
     def stop(self):
 
-        # Shut down
+        self.cnx.close()
 
 
 
