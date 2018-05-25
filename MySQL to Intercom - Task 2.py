@@ -4,7 +4,7 @@ from intercom.client import Client
 
 
 
-class IntercomUser():
+class IntercomUser:
     """
     Using MySQL database to create Intercom users. Users have the following properties:
 
@@ -14,17 +14,29 @@ class IntercomUser():
         email: A string up to 120 characters long representing the user's email
     """
 
-    def __init__(self):
+    def __init__(self, personal_access_token, user, password, host, database):
 
-        # Connect to Intercom API
-        self.intercom = Client(personal_access_token='personal_access_token')
+        self.personal_access_token = personal_access_token
+        self.user = user
+        self.password = password
+        self.host = host
+        self.database = database
 
-        # Connect to the database
+
+    def connect_to_Intercom(self):
+
+        self.intercom = Client(personal_access_token = self.personal_access_token)
+
         try:
-            self.cnx = mysql.connector.connect(user='user',
-                                               password='password',
-                                               host='127.0.0.1',
-                                               database='Monument')
+            pass
+
+
+    def connect_to_database(self):
+        try:
+            self.cnx = mysql.connector.connect(user=self.user,
+                                               password=self.password,
+                                               host=self.host,
+                                               database=self.database)
 
         except mysql.connector.Error as err:
             if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
@@ -35,6 +47,7 @@ class IntercomUser():
                 print(err)
 
 
+    def data_from_MySQL(self):
         self.cursor = self.cnx.cursor()
 
         # Get all users from MySQL table
@@ -56,7 +69,15 @@ class IntercomUser():
         self.cnx.close()
 
 
+    def run(self):
+        self.connect_to_Intercom()
+        self.connect_to_database()
+        self.data_from_MySQL()
+        self.create_Intercom_user()
+        self.stop()
+
 
 if __name__ == '__main__':
-
-#?
+    user_transfer = IntercomUser(personal_access_token="token", user="user",
+                                 password="password", host="127.0.0.1", database="Monument")
+    user_transfer.run()
