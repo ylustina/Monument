@@ -10,5 +10,5 @@ Using popen to run a list of commands.
 
 ## Task 2 -
 
-Sending user data from MySQL to Intercom
+Sending user data from MySQL to Intercom.
 
