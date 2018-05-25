@@ -15,7 +15,6 @@ class IntercomUser:
     """
 
     def __init__(self, personal_access_token, user, password, host, database):
-
         self.personal_access_token = personal_access_token
         self.user = user
         self.password = password
@@ -24,11 +23,10 @@ class IntercomUser:
 
 
     def connect_to_Intercom(self):
-
-        self.intercom = Client(personal_access_token = self.personal_access_token)
-
         try:
-            pass
+            self.intercom = Client(personal_access_token=self.personal_access_token)
+        except:
+            print("Error connecting to Intercom")
 
 
     def connect_to_database(self):
@@ -37,7 +35,6 @@ class IntercomUser:
                                                password=self.password,
                                                host=self.host,
                                                database=self.database)
-
         except mysql.connector.Error as err:
             if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
                 print("Access denied: Invalid username or password.")
@@ -48,16 +45,14 @@ class IntercomUser:
 
 
     def data_from_MySQL(self):
+        # Get all users and attributes from the MySQL table
         self.cursor = self.cnx.cursor()
-
-        # Get all users from MySQL table
         query = "SELECT id, name, email FROM user"
         self.cursor.execute(query)
 
 
     def create_Intercom_user(self):
-
-        # Go through each MySQL table user entry, creates Intercom user
+        # Transfer users from MySQL to Intercom
         for id, name, email in self.cursor:
             self.intercom.users.create(user_id=id,
                                        email=email,
