@@ -1,5 +1,4 @@
 import mysql.connector
-
 from mysql.connector import errorcode
 from intercom.client import Client
 
@@ -7,12 +6,12 @@ from intercom.client import Client
 
 class IntercomUser():
     """
-    Using MySQL database to create Intercom users. Users have following properties:
+    Using MySQL database to create Intercom users. Users have the following properties:
 
     Attributes:
-        id: Auto-incremented integer up to 11 digits long.
-        name: A string representing the user's name.
-        email: A string up to 120 characters long representing the user's email.
+        id: Auto-incremented integer up to 11 digits long
+        name: A string representing the user's name
+        email: A string up to 120 characters long representing the user's email
     """
 
     def __init__(self):
@@ -36,27 +35,28 @@ class IntercomUser():
                 print(err)
 
 
+        self.cursor = self.cnx.cursor()
 
         # Get all users from MySQL table
-
+        query = "SELECT id, name, email FROM user"
+        self.cursor.execute(query)
 
 
     def create_Intercom_user(self):
 
         # Go through each table user entry, call API
-        for id, name, email in ## table
+        for id, name, email in self.cursor:
             self.intercom.users.create(user_id = id,
                                        email=email,
                                        name=name)
 
 
     def stop(self):
-
+        self.cursor.close()
         self.cnx.close()
-
 
 
 
 if __name__ == '__main__':
 
-
+#?
