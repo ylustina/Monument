@@ -1,6 +1,6 @@
 # Monument
-
 #### Scripts for an internship at Monument Labs.
+
 
 
 ### Task 1 -
