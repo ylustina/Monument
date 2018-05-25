@@ -9,7 +9,7 @@ class IntercomUser:
     Using MySQL database to create Intercom users. Users have the following properties:
 
     Attributes:
-        id: Auto-incremented integer up to 11 digits long
+        id: Auto-incremented integer
         name: A string representing the user's name
         email: A string up to 120 characters long representing the user's email
     """
