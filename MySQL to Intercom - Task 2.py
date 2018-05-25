@@ -44,9 +44,9 @@ class IntercomUser():
 
     def create_Intercom_user(self):
 
-        # Go through each table user entry, call API
+        # Go through each MySQL table user entry, creates Intercom user
         for id, name, email in self.cursor:
-            self.intercom.users.create(user_id = id,
+            self.intercom.users.create(user_id=id,
                                        email=email,
                                        name=name)
 
