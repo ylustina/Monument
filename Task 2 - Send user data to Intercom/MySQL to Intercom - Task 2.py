@@ -65,10 +65,10 @@ class IntercomUser:
 
 
     def run(self):
-        self.connect_to_Intercom()
+        self.connect_to_intercom()
         self.connect_to_database()
-        self.data_from_MySQL()
-        self.create_Intercom_user()
+        self.data_from_mysql()
+        self.create_intercom_user()
         self.stop()
 
 
