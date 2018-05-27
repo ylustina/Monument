@@ -1,6 +1,6 @@
 import mysql.connector
-from mysql.connector import errorcode
 from intercom.client import Client
+from mysql.connector import errorcode
 
 
 
@@ -22,7 +22,7 @@ class IntercomUser:
         self.database = database
 
 
-    def connect_to_Intercom(self):
+    def connect_to_intercom(self):
         try:
             self.intercom = Client(personal_access_token=self.personal_access_token)
         except:
@@ -44,14 +44,14 @@ class IntercomUser:
                 print(err)
 
 
-    def data_from_MySQL(self):
+    def data_from_mysql(self):
         # Get all users and attributes from the MySQL table
         self.cursor = self.cnx.cursor()
         query = "SELECT id, name, email FROM user"
         self.cursor.execute(query)
 
 
-    def create_Intercom_user(self):
+    def create_intercom_user(self):
         # Transfer users from MySQL to Intercom
         for id, name, email in self.cursor:
             self.intercom.users.create(user_id=id,
