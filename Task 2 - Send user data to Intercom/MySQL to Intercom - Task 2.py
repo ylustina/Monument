@@ -36,10 +36,10 @@ class IntercomUser:
                                                host=self.host,
                                                database=self.database)
         except mysql.connector.Error as err:
-            if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
-                print("Access denied: Invalid username or password.")
-            elif err.errno == errorcode.ER_BAD_DB_ERROR:
+            if err.errno == errorcode.ER_BAD_DB_ERROR:
                 print("Database does not exist.")
+            elif err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
+                print("Access denied: Invalid username or password.")
             else:
                 print(err)
 
